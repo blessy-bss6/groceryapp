@@ -10,6 +10,8 @@ class Txt extends StatelessWidget {
   final String? fontFamily;
   final TextAlign? textAlign;
   final int? maxLines;
+  final TextDecoration? decoration;
+
   const Txt(
       {Key? key,
       this.t,
@@ -19,7 +21,8 @@ class Txt extends StatelessWidget {
       this.fontWeight,
       this.textAlign,
       this.maxLines,
-      this.style})
+      this.style,
+      this.decoration})
       : super(key: key);
 
   @override
@@ -30,6 +33,7 @@ class Txt extends StatelessWidget {
       maxLines: maxLines ?? null,
       style: style ??
           TextStyle(
+            decoration: decoration,
             color: color ?? null,
             fontSize: fontSize ?? 14,
             fontWeight: fontWeight ?? null,
@@ -48,14 +52,19 @@ class Btn extends StatelessWidget {
   final double? height;
   final Color? color;
   final Color? txtColor;
+  final EdgeInsets? padding, margin;
+  final Alignment? alignment;
   const Btn(
       {Key? key,
+      this.alignment,
       this.btnName,
       this.color,
       this.txtColor,
       this.width,
       this.height,
       this.onTap,
+      this.padding,
+      this.margin,
       this.style})
       : super(key: key);
 
@@ -64,6 +73,9 @@ class Btn extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        alignment: alignment,
+        padding: padding,
+        margin: margin,
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: color ?? blackColor,
@@ -84,6 +96,81 @@ class Btn extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class IconBtn extends StatelessWidget {
+  final dynamic onPressed;
+  final IconData? icon;
+  final double? size;
+  final Color? color;
+  final Color? color2;
+  const IconBtn(
+      {Key? key, this.onPressed, this.icon, this.color2, this.color, this.size})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: onPressed,
+      icon: Icon(
+        icon,
+        color: color2,
+      ),
+      iconSize: size,
+      color: color,
+    );
+  }
+}
+
+// @ Cart Button
+class CartBtn extends StatefulWidget {
+  final dynamic plusCallBack;
+  final dynamic minusCallBack;
+  const CartBtn({Key? key, this.plusCallBack, this.minusCallBack})
+      : super(key: key);
+
+  @override
+  State<CartBtn> createState() => _CartBtnState();
+}
+
+class _CartBtnState extends State<CartBtn> {
+  dynamic cartItem = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          IconBtn(
+            icon: Icons.remove,
+            size: 20,
+            onPressed: cartItem > 1
+                ? () {
+                    setState(() {
+                      cartItem -= 1;
+                      widget.minusCallBack(cartItem);
+                    });
+                  }
+                : null,
+          ),
+          Txt(
+            t: ' $cartItem ',
+            fontSize: 10,
+          ),
+          IconBtn(
+            icon: Icons.add,
+            size: 20,
+            onPressed: () {
+              setState(() {
+                cartItem += 1;
+                widget.plusCallBack(cartItem);
+              });
+            },
+          )
+        ],
       ),
     );
   }

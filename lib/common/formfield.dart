@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../utils/common.dart';
+
 import '../utils/style.dart';
-import 'dart:async';
 import 'button.dart';
 
 class EditTextField extends StatelessWidget {
   final String? labelText;
   final TextEditingController? controller;
   final dynamic onTap;
-  final String? Function(String?)? validator;
+  // final String? Function(String?)? validator;
+  final Function? validator;
+
   final Function(String)? onChanged;
   final int? maxLines;
   final int? maxLength;
@@ -60,11 +61,12 @@ class EditTextField extends StatelessWidget {
         onSaved: onSaved,
         keyboardType: keyboardType,
         validator: (value) => validator!(value),
-        // validator: formValidator,
+        // validator: validator,
         // autofocus: false,
         // readOnly: readOnly ?? false,
         scrollPadding: EdgeInsets.zero,
         decoration: InputDecoration(
+            errorStyle: TextStyle(color: blackColor),
             errorText: errorText,
             counter: Offstage(),
             labelStyle: TextStyle(
@@ -76,6 +78,14 @@ class EditTextField extends StatelessWidget {
                 vertical: 10,
                 horizontal: 10),
             isDense: true,
+            focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                width: 1.5,
+                color: offWhiteColor,
+              ),
+            ),
+            errorBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: offWhiteColor, width: 1.5)),
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: offWhiteColor, width: 1.5),
             ),
@@ -92,5 +102,40 @@ class EditTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             suffixIconConstraints:
                 BoxConstraints.tightFor(width: 35.0, height: 14.0)));
+  }
+}
+
+// ! Apply Box
+class ApplyBox extends StatelessWidget {
+  const ApplyBox({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.only(left: 20, right: 20, bottom: 1),
+        padding: EdgeInsets.all(5),
+        height: 50,
+        // color: Colors.white,
+        child: Center(
+          child: TextFormField(
+            decoration: new InputDecoration(
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Btn(
+                  width: 50,
+                  height: 25,
+                  btnName: 'APPLY',
+                  txtColor: offWhiteColor,
+                  color: Colors.green,
+                ),
+              ),
+              hintText: 'Coupon Code',
+              contentPadding: EdgeInsets.all(8),
+              isDense: true,
+              border: new OutlineInputBorder(
+                  borderSide: new BorderSide(color: Colors.grey)),
+            ),
+          ),
+        ));
   }
 }

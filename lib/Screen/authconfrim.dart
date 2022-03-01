@@ -38,7 +38,7 @@ class AuthOptionScr extends StatelessWidget {
                     btnName: 'LOGIN AS A CUSTOMER',
                     color: bottomSheet,
                   ),
-                  heightSizedBox(25),
+                  heightSizedBox(25.0),
                   Btn(
                     onTap: () => navigationPush(context, LoginScr()),
                     width: double.maxFinite,
@@ -59,7 +59,19 @@ class AuthOptionScr extends StatelessWidget {
 class WelcomeTxt extends StatelessWidget {
   final String? msg;
   final String? title;
-  const WelcomeTxt({Key? key, this.msg, this.title}) : super(key: key);
+  final Color? color1;
+  final Color? color2;
+  final double? fontSize1;
+  final double? fontSize2;
+  const WelcomeTxt(
+      {Key? key,
+      this.msg,
+      this.title,
+      this.color1,
+      this.color2,
+      this.fontSize1,
+      this.fontSize2})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +81,13 @@ class WelcomeTxt extends StatelessWidget {
       children: [
         Txt(
           t: title ?? 'Hello, Good Day ! ',
-          fontSize: 17,
-          color: offWhiteColor,
+          fontSize: fontSize1 ?? 17,
+          color: color1 ?? offWhiteColor,
         ),
         Txt(
           t: msg ?? 'descrition..........................................',
-          fontSize: 15,
-          color: offWhiteColor,
+          fontSize: fontSize2 ?? 15,
+          color: color2 ?? offWhiteColor,
         ),
       ],
     );

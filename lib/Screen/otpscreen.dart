@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocers/Screen/home.dart';
 import '../common/button.dart';
 import '../utils/common.dart';
 import '../utils/style.dart';
@@ -26,7 +27,7 @@ class _OtpScreenState extends State<OtpScreen> {
     print('Otp value $otpData');
     if (otpData!.length == 4) {
       print('otp mobile Number ${widget.phone}');
-      print(otpData);
+      navigationPush(context, HomeScreen());
     } else {
       snackBar(context, 'Please fill otp first');
     }
@@ -52,7 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 title: 'Enter Verfication Code',
                 msg: 'We have sent OTP on your number ',
               ),
-              heightSizedBox(50),
+              heightSizedBox(50.0),
               // Implement 4 input fields
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -64,7 +65,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ],
               ),
               heightSizedBox(
-                30,
+                30.0,
               ),
               // ! BUTTON OF VERIFY
               Padding(

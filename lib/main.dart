@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grocers/Screen/login.dart';
+import 'package:grocers/Screen/home.dart';
 
-import 'Screen/authconfrim.dart';
-import 'Screen/spalash.dart';
+import 'Screen/cartScr.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +18,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AuthOptionScr(),
+      // home: SplashScr(),
+      home: CartScreen(),
+      // home: HomeScreen(),
+      // home: WelcomeScr()
     );
   }
 }

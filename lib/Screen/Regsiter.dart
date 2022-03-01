@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocers/Screen/authconfrim.dart';
 import 'package:grocers/Screen/login.dart';
 import 'package:grocers/Screen/otpscreen.dart';
+import 'package:grocers/common/validate.dart';
 import 'package:grocers/utils/style.dart';
 
 import '../common/button.dart';
@@ -17,6 +18,20 @@ class RegisterScr extends StatefulWidget {
 
 class _RegisterScrState extends State<RegisterScr> {
   final mobileController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+  // ! rister method
+  _registerMethod() async {
+    var isvalid = _formKey.currentState!.validate();
+    // print('valid $isvalid');
+    if (!isvalid) {
+      return 'Please Enter Valid Data';
+    }
+    _formKey.currentState!.save();
+    if (isvalid == true) {
+      navigationPush(context, OtpScreen(phone: mobileController.text));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +56,7 @@ class _RegisterScrState extends State<RegisterScr> {
                 t: 'Already have an account ?',
                 color: greyColor,
               ),
-              heightSizedBox(5),
+              heightSizedBox(5.0),
               Btn(
                 onTap: () => navigationPush(context, LoginScr()),
                 height: 40,
@@ -52,55 +67,59 @@ class _RegisterScrState extends State<RegisterScr> {
           ),
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          // borderRadius: BorderRadius.only(
-          //   bottomLeft: Radius.circular(25),
-          //   bottomRight: Radius.circular(25),
-          // ),
-          borderRadius: BorderRadius.circular(6),
-          image: DecorationImage(
-              image: AssetImage('assets/images/bg02.png'), fit: BoxFit.fill),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            WelcomeTxt(
-              title: 'Create an Account',
-              msg:
-                  'We are going to send you a OTP to \n authentic your phone number',
-            ),
-            //  TEXT FORM FIELD
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Txt(
-                    t: 'Enter Mobile Number',
-                    fontSize: 12,
-                    color: offWhiteColor,
-                  ),
-                  EditTextField(
-                    controller: mobileController,
-                    keyboardType: TextInputType.phone,
-                    maxLength: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Btn(
-                      onTap: () => navigationPush(context, OtpScreen()),
-                      width: double.maxFinite,
-                      height: 40,
-                      btnName: 'CREATE ACCOUNT',
-                      color: bottomSheet,
-                    ),
-                  ),
-                ],
+      body: Form(
+        key: _formKey,
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.only(
+            //   bottomLeft: Radius.circular(25),
+            //   bottomRight: Radius.circular(25),
+            // ),
+            borderRadius: BorderRadius.circular(6),
+            image: DecorationImage(
+                image: AssetImage('assets/images/bg02.png'), fit: BoxFit.fill),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              WelcomeTxt(
+                title: 'Create an Account',
+                msg:
+                    'We are going to send you a OTP to \n authentic your phone number',
               ),
-            ),
-          ],
+              //  TEXT FORM FIELD
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Txt(
+                      t: 'Enter Mobile Number',
+                      fontSize: 12,
+                      color: offWhiteColor,
+                    ),
+                    EditTextField(
+                      controller: mobileController,
+                      keyboardType: TextInputType.phone,
+                      maxLength: 10,
+                      validator: validateMobile,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Btn(
+                        onTap: () => _registerMethod(),
+                        width: double.maxFinite,
+                        height: 40,
+                        btnName: 'CREATE ACCOUNT',
+                        color: bottomSheet,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
