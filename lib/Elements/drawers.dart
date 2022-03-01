@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:grocers/Screen/login.dart';
 import 'package:grocers/utils/common.dart';
 import 'package:grocers/utils/style.dart';
 
+import '../Screen/faqScr.dart';
+import '../Screen/notificationScr.dart';
+import '../Screen/wishlistScr.dart';
 import '../common/button.dart';
 
 class DrawerScreen extends StatefulWidget {
@@ -35,12 +37,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
       CusDrawerList(
         title: 'Wishlist',
         icon: Icons.favorite_border,
+        submitMethod: WishListScreen(),
       ),
       CusDrawerList(title: 'Manage Address', icon: Icons.location_on),
       CusDrawerList(title: 'Payment ', icon: Icons.payment),
       CusDrawerList(title: 'Offers', icon: Icons.percent_outlined),
-      CusDrawerList(title: 'Notifictions', icon: Icons.payment),
-      CusDrawerList(title: 'FAQs', icon: Icons.translate),
+      CusDrawerList(
+          title: 'Notifictions',
+          icon: Icons.payment,
+          submitMethod: NotificationScreen()),
+      CusDrawerList(
+        title: 'FAQs',
+        icon: Icons.translate,
+        submitMethod: FaqScreen(),
+      ),
       CusDrawerList(title: 'Help', icon: Icons.perm_phone_msg_rounded),
       CusDrawerList(
         title: 'Logout',

@@ -4,7 +4,7 @@ import 'package:grocers/utils/common.dart';
 import '../Elements/all_list_content.dart';
 import '../common/button.dart';
 import '../utils/style.dart';
-import 'allproList.dart';
+import 'prodShowScr.dart';
 
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({Key? key}) : super(key: key);
@@ -64,7 +64,7 @@ class CategoryScreen extends StatelessWidget {
                 ),
                 delegate: SliverChildBuilderDelegate((context, index) {
                   return CategeoryGridProdList(
-                    onTap: () => navigationPush(context, AllProdListData()),
+                    onTap: () => navigationPush(context, ProductShowScreen()),
                     imageUrl: 'assets/images/banana.png',
                     title: 'Categoryname',
                   );

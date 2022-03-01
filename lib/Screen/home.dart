@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:grocers/Elements/all_list_content.dart';
 import 'package:grocers/Elements/baseAppbar.dart';
 import 'package:grocers/Elements/drawers.dart';
-import 'package:grocers/Screen/allproList.dart';
+import 'package:grocers/Screen/prodShowScr.dart';
+import 'package:grocers/Screen/notificationScr.dart';
 import 'package:grocers/Screen/prodDetails.dart';
 import 'package:grocers/common/formfield.dart';
 import 'package:grocers/utils/common.dart';
@@ -114,10 +115,10 @@ class HomeScreen extends StatelessWidget {
         title: 'Hey, Username',
         centerTitle: true,
         actionList: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications),
-            iconSize: 20,
+          IconBtn(
+            onPressed: () => navigationPush(context, NotificationScreen()),
+            icon: Icons.notifications,
+            size: 20,
             color: offWhiteColor,
           )
         ],
@@ -272,7 +273,7 @@ class CategoryListItem extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 8.0, left: 8, right: 8, bottom: 5),
                 child: InkWell(
-                  onTap: () => navigationPush(context, AllProdListData()),
+                  onTap: () => navigationPush(context, ProductShowScreen()),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

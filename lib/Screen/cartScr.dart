@@ -9,8 +9,34 @@ import '../common/button.dart';
 import '../common/formfield.dart';
 import '../utils/style.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  // dynamic price;
+  // dynamic quantity;
+  // dynamic fullPrice;
+  // plusCallBack(dynamic cartItem) {
+  //   setState(() {
+  //     price = cartItem * 50;
+  //     quantity = cartItem;
+  //     fullPrice = cartItem * 90;
+  //     // print(' plus $cartItem');
+  //   });
+  // }
+
+  // minusCallBack(dynamic cartItem) {
+  //   setState(() {
+  //     // print('minus $cartItem');
+  //     price = cartItem * 50;
+  //     quantity = cartItem;
+  //     fullPrice = cartItem * 90;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +48,17 @@ class CartScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           // shrinkWrap: true,
-          children: [CartProdVerList(), CartContentFooter(), CartPriceList()],
+          children: [
+            CartProdVerList(
+                // plusCallBack: plusCallBack,
+                // minusCallBack: minusCallBack,
+                // price: price,
+                // fullPrice: fullPrice,
+                // quantity: quantity,
+                ),
+            CartContentFooter(),
+            CartPriceList()
+          ],
         ),
       ),
       bottomNavigationBar: Padding(
@@ -42,9 +78,19 @@ class CartScreen extends StatelessWidget {
 
 class CartProdContent extends StatefulWidget {
   final dynamic prodNumber;
-  const CartProdContent({
+  // final dynamic plusCallBack;
+  // final dynamic minusCallBack;
+  // dynamic price;
+  // dynamic quantity;
+  // dynamic fullPrice;
+  CartProdContent({
     Key? key,
     this.prodNumber,
+    // this.minusCallBack,
+    // this.plusCallBack,
+    // this.fullPrice,
+    // this.price,
+    // this.quantity
   }) : super(key: key);
 
   @override
@@ -58,9 +104,9 @@ class _CartProdContentState extends State<CartProdContent> {
 
   plusCallBack(dynamic cartItem) {
     setState(() {
-      price = cartItem * 150;
+      price = cartItem * 50;
       quantity = cartItem;
-      fullPrice = cartItem * 300;
+      fullPrice = cartItem * 90;
       // print(' plus $cartItem');
     });
   }
@@ -68,9 +114,9 @@ class _CartProdContentState extends State<CartProdContent> {
   minusCallBack(dynamic cartItem) {
     setState(() {
       // print('minus $cartItem');
-      price = cartItem * 150;
+      price = cartItem * 50;
       quantity = cartItem;
-      fullPrice = cartItem * 300;
+      fullPrice = cartItem * 90;
     });
   }
 
@@ -82,7 +128,10 @@ class _CartProdContentState extends State<CartProdContent> {
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(
-                    width: 1.0, color: Color.fromARGB(255, 221, 214, 214)))),
+                    width: 1.0, color: Color.fromARGB(255, 221, 214, 214)))
+            // border: Border.all(
+            //     width: 1, color: Color.fromARGB(255, 221, 214, 214))
+            ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
