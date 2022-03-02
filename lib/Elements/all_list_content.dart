@@ -36,14 +36,24 @@ class ProdShowContent extends StatelessWidget {
           // lineRight()
           ProdLastContent(
             onTap: onTap,
-            btnName: btnName,
             src: 'assets/icons/like-icon.png',
+            child: clBtn == true ? Text('true') : Text('false'),
           )
         ],
       ),
     );
   }
 }
+
+// Btn(
+//                       padding: EdgeInsets.all(3),
+
+//                       onTap: (){},
+//                       btnName: 'MOVE INTO BAG',
+//                       style: TextStyle(color: offWhiteColor, fontSize: 10),
+//                       // txtColor: offWhiteColor,
+//                       color: Colors.green,
+//                     )
 
 // class ProdListContent extends StatelessWidget {
 //   ProdListContent({

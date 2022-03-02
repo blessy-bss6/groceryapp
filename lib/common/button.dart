@@ -142,33 +142,47 @@ class _CartBtnState extends State<CartBtn> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 30,
+      decoration: BoxDecoration(
+          border: Border.all(width: 1), borderRadius: BorderRadius.circular(3)),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          IconBtn(
-            icon: Icons.remove,
-            size: 20,
-            onPressed: cartItem > 1
-                ? () {
-                    setState(() {
-                      cartItem -= 1;
-                      widget.minusCallBack(cartItem);
-                    });
-                  }
-                : null,
+          Container(
+            alignment: Alignment.centerLeft,
+            child: IconBtn(
+              icon: Icons.remove,
+              size: 20,
+              onPressed: cartItem > 1
+                  ? () {
+                      setState(() {
+                        cartItem -= 1;
+                        widget.minusCallBack(cartItem);
+                      });
+                    }
+                  : null,
+            ),
           ),
-          Txt(
-            t: ' $cartItem ',
-            fontSize: 10,
+          Container(
+            alignment: Alignment.center,
+            child: Txt(
+              t: ' $cartItem ',
+              fontSize: 15,
+            ),
           ),
-          IconBtn(
-            icon: Icons.add,
-            size: 20,
-            onPressed: () {
-              setState(() {
-                cartItem += 1;
-                widget.plusCallBack(cartItem);
-              });
-            },
+          Container(
+            alignment: Alignment.centerRight,
+            child: IconBtn(
+              icon: Icons.add,
+              size: 20,
+              onPressed: () {
+                setState(() {
+                  cartItem += 1;
+                  widget.plusCallBack(cartItem);
+                });
+              },
+            ),
           )
         ],
       ),

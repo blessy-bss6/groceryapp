@@ -3,6 +3,7 @@ import 'package:grocers/Screen/home.dart';
 import 'package:grocers/Screen/notificationScr.dart';
 
 import 'Screen/cartScr.dart';
+import 'Screen/faqScr.dart';
 import 'Screen/spalash.dart';
 import 'Screen/wishlistScr.dart';
 
@@ -16,17 +17,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Grocery App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // home: SplashScreen(),
-      // home: CartScreen(),
-      home: HomeScreen(),
-      // home: WelcomeScr()
-      // home: WishListScreen()
-      // home: NotificationScreen(),
-    );
+        title: 'Grocery App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        // home: SplashScreen(),
+        // home: CartScreen(),
+        // home: HomeScreen(),
+        // home: WelcomeScr()
+        home: FaqScreen());
   }
 }

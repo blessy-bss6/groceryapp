@@ -37,9 +37,10 @@ class WishListScreen extends StatelessWidget {
                   ProdMidContent(),
                   // lineRight()
                   ProdLastContent(
-                    btnName: 'MOVE INTO BAG',
                     src: 'assets/icons/delete-icon.png',
-                  )
+                    onTap: () {},
+                    btnName: 'MOVE INTO BAG',
+                  ),
                 ],
               ),
             );
@@ -51,79 +52,15 @@ class WishListScreen extends StatelessWidget {
   }
 }
 
-// 1 WishList SCREEN
-// class WishListContent extends StatelessWidget {
-//   final dynamic prodNumber;
-
-//   const WishListContent({Key? key, this.prodNumber}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       // padding: const EdgeInsets.all(10.0),
-//       margin: const EdgeInsets.all(10.0),
-//       decoration: BoxDecoration(
-//           border:
-//               Border.all(width: 1, color: Color.fromARGB(255, 221, 214, 214))),
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           ImgIcon(
-//             src: 'assets/images/apple.png',
-//             width: 120,
-//             height: 100,
-//           ),
-//           ProdMidContent(),
-//           // lineRight()
-//           ProdLastContent(
-//             btnName: 'MOVE INTO BAG',
-//             src: 'assets/icons/delete-icon.png',
-//           )
-//         ],
-//       ),
-//     );
-//   }
-
-//   // Widget lineRight() {
-//   //   return Padding(
-//   //     padding: const EdgeInsets.only(top: 5.0, right: 8.0),
-//   //     child: Column(
-//   //       // mainAxisAlignment: MainAxisAlignment.spaceAround,
-//   //       children: [
-//   //         InkWell(
-//   //           onTap: (() => print('remove product')),
-//   //           child: ImgIcon(
-//   //             src: src ?? 'assets/icons/delete-icon.png',
-//   //             width: 15,
-//   //             height: 15,
-//   //           ),
-//   //         ),
-//   //         heightSizedBox(20.0),
-//   //         Padding(
-//   //           padding: const EdgeInsets.all(20),
-//   //           child: Btn(
-//   //             padding: EdgeInsets.all(3),
-//   //             // alignment: Alignment.bottomLeft,
-//   //             // height: 20,
-//   //             // width: 30,
-//   //             onTap: () => print('move to Bag'),
-//   //             btnName: btnName ?? 'MOVE INTO BAG',
-//   //             style: TextStyle(color: offWhiteColor, fontSize: 10),
-//   //             // txtColor: offWhiteColor,
-//   //             color: Colors.green,
-//   //           ),
-//   //         ),
-//   //       ],
-//   //     ),
-//   //   );
-//   // }
-// }
-
 // ! Product Mid Cotent
 class ProdMidContent extends StatelessWidget {
   final dynamic prodNumber;
-  const ProdMidContent({Key? key, this.prodNumber}) : super(key: key);
+  final dynamic mrp;
+  final dynamic price;
+  final dynamic quantity;
+  const ProdMidContent(
+      {Key? key, this.prodNumber, this.mrp, this.price, this.quantity})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +97,7 @@ class ProdMidContent extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Txt(
             // textAlign: TextAlign.left,
-            t: 'Quantity KG',
+            t: 'Quantity ${quantity ?? 1} KG',
             fontSize: 13,
             color: greyColor,
           ),
@@ -171,7 +108,7 @@ class ProdMidContent extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Txt(
             // textAlign: TextAlign.left,
-            t: 'MRP:-',
+            t: 'MRP:-${mrp ?? 1500}',
             fontSize: 13, decoration: TextDecoration.lineThrough,
             color: greyColor,
           ),
@@ -182,7 +119,7 @@ class ProdMidContent extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Txt(
             // textAlign: TextAlign.left,
-            t: 'Rs 100',
+            t: 'Rs ${price ?? 100}',
             fontSize: 13, style: labelTextStyle,
             color: greyColor,
           ),
@@ -195,9 +132,14 @@ class ProdMidContent extends StatelessWidget {
 // ! Product  last content
 class ProdLastContent extends StatelessWidget {
   final dynamic onTap;
-  final String? btnName;
+
   final String? src;
-  ProdLastContent({Key? key, this.btnName, this.onTap, this.src})
+  final Widget? child;
+  final dynamic btnOnTap;
+  final String? btnName;
+
+  ProdLastContent(
+      {Key? key, this.onTap, this.src, this.child, this.btnOnTap, this.btnName})
       : super(key: key);
 
   @override
@@ -208,7 +150,7 @@ class ProdLastContent extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           InkWell(
-            onTap: (() => print('remove product')),
+            onTap: onTap,
             child: ImgIcon(
               src: src ?? 'assets/icons/delete-icon.png',
               width: 15,
@@ -221,8 +163,8 @@ class ProdLastContent extends StatelessWidget {
             child: Btn(
               padding: EdgeInsets.all(3),
 
-              onTap: onTap,
-              btnName: btnName ?? 'MOVE INTO BAG',
+              onTap: btnOnTap,
+              btnName: 'MOVE INTO BAG',
               style: TextStyle(color: offWhiteColor, fontSize: 10),
               // txtColor: offWhiteColor,
               color: Colors.green,
