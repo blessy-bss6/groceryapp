@@ -78,7 +78,7 @@ class Btn extends StatelessWidget {
         margin: margin,
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          color: color ?? blackColor,
+          color: color,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(3),
             topRight: Radius.circular(3),
@@ -86,8 +86,8 @@ class Btn extends StatelessWidget {
             bottomRight: Radius.circular(3),
           ),
         ),
-        width: width ?? null,
-        height: height ?? null,
+        width: width,
+        height: height,
         child: Center(
           child: Txt(
             t: btnName!,
